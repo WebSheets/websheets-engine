@@ -1,0 +1,38 @@
+{
+  "name": "websheets-engine",
+  "version": "0.1.0",
+  "description": "Excel-style formula parser",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/.bin/babel src --out-dir build --source-maps --no-babelrc --presets es2015",
+    "prepublish": "rm -rf build/* && npm run build",
+    "test": "./node_modules/.bin/mocha --recursive"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-polyfill": "^6.3.14",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-register": "^6.6.0",
+    "mocha": "^2.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WebSheets/websheets-engine.git"
+  },
+  "keywords": [
+    "spreadsheets",
+    "websheets",
+    "excel",
+    "formula"
+  ],
+  "author": "Matt Basta <me@mattbasta.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WebSheets/websheets-engine/issues"
+  },
+  "homepage": "https://github.com/WebSheets/websheets-engine#readme",
+  "dependencies": {
+    "formulajs": "git://github.com/CrowdProcess/formula.js#master"
+  }
+}
