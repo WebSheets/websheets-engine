@@ -1,7 +1,6 @@
 import assert from 'assert';
 
 import compiler from '../../src';
-import {getCellID} from '../../src/cellID';
 
 import {Runner} from './_utils.js';
 

@@ -1,7 +1,6 @@
 import assert from 'assert';
 
 import compiler from '../../src';
-import {getCellID} from '../../src/cellID';
 
 import {Runner} from './_utils.js';
 
@@ -45,7 +44,6 @@ describe('Formulae', () => {
     ].forEach(([formula, result]) => {
         it(`should handle ${formula}`, () => {
             const compiled = compiler(formula);
-            // console.log(compiled.toString());
             assert.equal(compiled.run(r), result);
         });
     });

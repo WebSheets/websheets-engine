@@ -18,6 +18,9 @@ export const TOKEN_LPAREN = /^\(/;
 export const TOKEN_COMMA = /^,/;
 export const TOKEN_COLON = /^:/;
 export const TOKEN_PERCENT = /^%/;
+export const TOKEN_CB_OPEN = /^\{/;
+export const TOKEN_CB_CLOSE = /^\}/;
+export const TOKEN_SEMI = /^;/;
 export const TOKEN_WS = /^\s+/;
 
 const PARSED_CACHE_THRESHOLD = 10;
@@ -81,6 +84,15 @@ export default function parse(expression) {
         } else if (matches = TOKEN_PERCENT.exec(remainder)) {
             output = new ExpressionToken('percent', '%');
 
+        } else if (matches = TOKEN_CB_OPEN.exec(remainder)) {
+            output = new ExpressionToken('cbopen', '{');
+
+        } else if (matches = TOKEN_CB_CLOSE.exec(remainder)) {
+            output = new ExpressionToken('cbclose', '}');
+
+        } else if (matches = TOKEN_SEMI.exec(remainder)) {
+            output = new ExpressionToken('semi', ';');
+
         } else if (matches = TOKEN_COLON.exec(remainder)) {
             output = new ExpressionToken('colon', ':');
 
@@ -141,6 +153,9 @@ export default function parse(expression) {
 
         } else if (accepted = accept('ident')) {
             return parseIdentifier(accepted);
+
+        } else if (accepted = accept('cbopen')) {
+            return parseArrayConstant();
         }
 
         throw new SyntaxError(`Unrecognized primitive value: ${peek()}`);
@@ -156,6 +171,25 @@ export default function parse(expression) {
             rematched[1] === '$',
             accepted.value
         );
+    }
+    function parseArrayConstant() {
+        const content = [[]];
+        do {
+            content[content.length - 1].push(parseExpression());
+            if (accept('comma')) {
+                continue;
+            }
+            if (accept('semi')) {
+                content.push([]);
+            }
+        } while (!accept('cbclose'));
+
+        // Validate the array
+        const firstWidth = content[0].length;
+        if (!content.every(x => x.length === firstWidth)) {
+            throw new SyntaxError('Array has invalid size');
+        }
+        return new nodes.ArrayConstant(content);
     }
     function parseRange() {
         const base = parsePrimitive();

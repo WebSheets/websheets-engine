@@ -1,3 +1,4 @@
+import ArrayConstant from './ArrayConstant';
 import BinopAdd from './BinopAdd';
 import BinopCompEQ from './BinopCompEQ';
 import BinopCompGT from './BinopCompGT';
@@ -21,6 +22,7 @@ import UnaryMinus from './UnaryMinus';
 import UnaryPlus from './UnaryPlus';
 
 export {
+    ArrayConstant,
     BinopAdd,
     BinopCompEQ,
     BinopCompGT,
