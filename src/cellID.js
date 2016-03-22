@@ -1,3 +1,5 @@
+import {TOKEN_CELL_ID} from './index';
+
 
 export function getCellID(row, column) {
     let base = '';
@@ -43,3 +45,15 @@ class CellPosition {
         this.row = row;
     }
 }
+
+
+export function adjustCellID(cellID, deltaRow, deltaCol, pinRow = false, pinCol = false) {
+    const pos = getCellPos(cellID);
+    const row = pos.row + (pinRow ? 0 : deltaRow);
+    const col = pos.col + (pinCol ? 0 : deltaCol);
+    const newCellID = getCellID(row, col);
+    const rematched = TOKEN_CELL_ID.exec(newCellID);
+    const rawID = (pinCol ? '$' : '') + rematched[2] + (pinRow ? '$' : '') + rematched[4];
+
+    return {cellID: newCellID, rawCellID: rawID};
+};

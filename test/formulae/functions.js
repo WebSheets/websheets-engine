@@ -47,4 +47,17 @@ describe('Functions', () => {
     it('pi()', () => {
         assert.equal(compiler('PI()').run(null), Math.PI);
     });
+
+    describe('offset()', () => {
+        it('should adjust cell references', () => {
+            const r = new Runner({A1: 1, A2: 2, B1: 3, B2: 4});
+            assert.equal(compiler('offset(a1, 1, 0)').run(r), 2);
+            assert.equal(compiler('offset(b1, 1, 0)').run(r), 4);
+        });
+        it('should adjust sizes', () => {
+            const r = new Runner({A1: 1, A2: 2, B1: 3, B2: 4});
+            assert.equal(compiler('sum(offset(a1, 0, 0, 2, 2))').run(r), 10);
+        });
+    });
+
 });

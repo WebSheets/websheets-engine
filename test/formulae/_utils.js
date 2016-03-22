@@ -1,3 +1,6 @@
+import {getCellID} from '../../src/cellID';
+
+
 export class Runner {
     constructor(values, sheets = {}) {
         this.data = values;

@@ -1,6 +1,6 @@
 import BaseNode from './BaseNode';
-import {getCellID, getCellPos} from '../cellID';
-import {TOKEN_CELL_ID} from '../index';
+import {CellReference} from '../values';
+import {adjustCellID} from '../cellID';
 
 
 export default class Identifier extends BaseNode {
@@ -12,12 +12,15 @@ export default class Identifier extends BaseNode {
         this.raw = raw;
     }
     adjust(deltaRow, deltaCol) {
-        const pos = getCellPos(this.value);
-        const row = pos.row + (this.pinRow ? 0 : deltaRow);
-        const col = pos.col + (this.pinCol ? 0 : deltaCol);
-        this.value = getCellID(row, col);
-        const rematched = TOKEN_CELL_ID.exec(this.value);
-        this.raw = (this.pinCol ? '$' : '') + rematched[2] + (this.pinRow ? '$' : '') + rematched[4];
+        const {cellID, rawCellID} = adjustCellID(
+            this.value,
+            deltaRow,
+            deltaCol,
+            this.pinRow,
+            this.pinCol
+        );
+        this.value = cellID;
+        this.raw = rawCellID;
     }
     findCellDependencies(cb) {
         cb(this.value);
@@ -31,7 +34,7 @@ export default class Identifier extends BaseNode {
         );
     }
     run(sheet) {
-        return sheet.getCalculatedValueAtID(this.value);
+        return new CellReference(this.value, sheet);
     }
     toString() {
         return this.raw.toUpperCase();

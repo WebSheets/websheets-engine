@@ -17,6 +17,7 @@ import LiteralBoolean from './LiteralBoolean';
 import LiteralNumber from './LiteralNumber';
 import LiteralString from './LiteralString';
 import Range from './Range';
+import Root from './Root';
 import SheetLookup from './SheetLookup';
 import UnaryMinus from './UnaryMinus';
 import UnaryPlus from './UnaryPlus';
@@ -41,6 +42,7 @@ export {
     LiteralNumber,
     LiteralString,
     Range,
+    Root,
     SheetLookup,
     UnaryMinus,
     UnaryPlus,

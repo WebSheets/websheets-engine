@@ -193,7 +193,9 @@ export default function parse(expression) {
     }
     function parseRange() {
         const base = parsePrimitive();
-        if (!base || base.type !== 'identifier') return base;
+        if (!base || !(base instanceof nodes.Identifier)) {
+            return base;
+        }
         if (accept('colon')) {
             const end = assert('ident');
             return new nodes.Range(base, parseIdentifier(end));
@@ -304,7 +306,7 @@ export default function parse(expression) {
         return parseCompBinop();
     }
 
-    const output = parseExpression();
+    const output = new nodes.Root(parseExpression());
 
     if (!(expression in parsedExpressionCount)) {
         parsedExpressionCount[expression] = 1;
