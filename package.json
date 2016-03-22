@@ -1,6 +1,6 @@
 {
   "name": "websheets-engine",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Excel-style formula parser",
   "main": "index.js",
   "scripts": {
