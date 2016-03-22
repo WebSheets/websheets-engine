@@ -16,7 +16,13 @@ export default class UnaryMinus extends BaseNode {
         cb(this.base);
     }
     run(sheet) {
-        return -1 * parseNumAlways(this.base.run(sheet));
+        const makeNeg = val => {
+            if (Array.isArray(val)) {
+                return val.map(makeNeg);
+            }
+            return -1 * parseNumAlways(val);
+        };
+        return makeNeg(this.base.run(sheet));
     }
     toString() {
         return `-${this.base}`;

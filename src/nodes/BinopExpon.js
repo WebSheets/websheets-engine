@@ -1,8 +1,7 @@
-import BaseNode from './BaseNode';
-import {parseNumAlways} from '../functions';
+import BaseBinop from './BaseBinop';
 
 
-export default class BinopExpon extends BaseNode {
+export default class BinopExpon extends BaseBinop {
     constructor(left, right) {
         super();
         this.left = left;
@@ -18,11 +17,8 @@ export default class BinopExpon extends BaseNode {
         cb(this.left);
         cb(this.right);
     }
-    run(sheet) {
-        return Math.pow(
-            parseNumAlways(this.left.run(sheet)),
-            parseNumAlways(this.right.run(sheet))
-        );
+    runNumericOperation(left, right) {
+        return Math.pow(left, right);
     }
     toString() {
         return `(${this.left} ^ ${this.right})`;

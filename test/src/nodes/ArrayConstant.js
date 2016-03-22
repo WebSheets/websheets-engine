@@ -1,6 +1,6 @@
 import assert from 'assert';
 
-import compiler from '../../src';
+import compiler from '../../../src';
 
 
 describe('ArrayConstant', () => {
