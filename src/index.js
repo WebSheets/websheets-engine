@@ -1,5 +1,6 @@
 import ExpressionToken from './ExpressionToken';
 import * as nodes from './nodes';
+import {getCellID, getCellPos} from './cellID';
 
 
 export const TOKEN_BOOL = /^(true|false)/i;
@@ -282,4 +283,9 @@ export default function parse(expression) {
 
     return output;
 
+};
+
+export {
+    getCellID,
+    getCellPos,
 };
