@@ -33,6 +33,6 @@
   },
   "homepage": "https://github.com/WebSheets/websheets-engine#readme",
   "dependencies": {
-    "formulajs": "git://github.com/CrowdProcess/formula.js#master"
+    "@formulajs/formulajs": "^2.6.3"
   }
 }

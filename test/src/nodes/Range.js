@@ -7,6 +7,6 @@ describe('Range', () => {
     it('should be adjusted properly', () => {
         const out = compiler('A1:A1');
         out.adjust(1, 1);
-        assert.equal(out.toString(), 'B2:B2');
+        assert.strictEqual(out.toString(), 'B2:B2');
     });
 });

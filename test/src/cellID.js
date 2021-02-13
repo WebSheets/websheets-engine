@@ -15,7 +15,7 @@ describe('getCellID', () => {
         [0, 52, 'BA1'],
     ].forEach(([row, col, expected]) => {
         it(`should map row ${row} col ${col} to ${expected}`, () => {
-            assert.equal(getCellID(row, col), expected);
+            assert.strictEqual(getCellID(row, col), expected);
         });
     });
 });
@@ -33,8 +33,8 @@ describe('getCellPos', () => {
     ].forEach(([id, expectedRow, expectedCol]) => {
         it(`should map ${id} to row ${expectedRow} col ${expectedCol}`, () => {
             const {row, col} = getCellPos(id);
-            assert.equal(row, expectedRow, 'Expected row to match');
-            assert.equal(col, expectedCol, 'Expected col to match');
+            assert.strictEqual(row, expectedRow, 'Expected row to match');
+            assert.strictEqual(col, expectedCol, 'Expected col to match');
         });
     });
 });

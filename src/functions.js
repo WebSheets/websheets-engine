@@ -1,4 +1,4 @@
-import * as formulajs from 'formulajs';
+import * as formulajs from '@formulajs/formulajs';
 
 import {CellReference} from './values';
 
